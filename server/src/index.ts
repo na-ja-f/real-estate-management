@@ -13,6 +13,7 @@ app.use(cors({ origin: process.env.CLIENT_ORIGIN, credentials: true }));
 
 // Import routes
 import userRoutes from "./routes/user.route";
+import propertyRoutes from "./routes/property.route";
 
 // Middleware to parse incoming JSON requests
 app.use(express.json());
@@ -26,6 +27,7 @@ const PORT = process.env.PORT || 4000;
 
 // API Routes
 app.use("/api", userRoutes);
+app.use("/api/property", propertyRoutes);
 
 // Start the server with app.listen instead of server.listen
 app.listen(PORT, () => console.log(`server is running on ${PORT}`));

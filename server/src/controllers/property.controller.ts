@@ -5,19 +5,21 @@ export const createProperty = async (req: Request, res: Response) => {
   try {
     const newProperty = new Property(req.body);
     await newProperty.save();
+    console.log("body", res);
     res.status(201).json({
       message: "Property created successfully",
-      property: newProperty,
     });
   } catch (error) {
+    console.log(error);
+    
     res.status(400).json({ message: "Error creating property", error });
   }
 };
 
 export const getAllProperties = async (req: Request, res: Response) => {
-  try {
-    const properties = await Property.find();
-    res.status(200).json(properties);
+  try {    
+    const properties = await Property.find();    
+    res.status(200).json({properties});
   } catch (error) {
     res.status(500).json({ message: "Error fetching properties", error });
   }
@@ -29,7 +31,7 @@ export const getPropertyById = async (req: Request, res: Response) => {
     if (!property) {
       res.status(404).json({ message: "Property not found" });
     }
-    res.status(200).json(property);
+    res.status(200).json({property});
   } catch (error) {
     res.status(500).json({ message: "Error fetching property", error });
   }

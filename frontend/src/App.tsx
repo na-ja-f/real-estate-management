@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Outlet, useNavigate } from "react-router-dom";
+import SideNavbar from "./components/app/SideNavbar";
 
 function App() {
   const selectUser = (state: any) => state.auth.user;
@@ -15,9 +16,10 @@ function App() {
 
   return (
     <>
-        <div className="flex h-screen">
-          <Outlet />
-        </div>
+      <div className="flex h-screen">
+        <SideNavbar />
+        <Outlet />
+      </div>
     </>
   );
 }

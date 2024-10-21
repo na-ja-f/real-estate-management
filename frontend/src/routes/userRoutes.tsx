@@ -5,6 +5,10 @@ import App from "../App";
 import Protect from "./Protect";
 import Error from "../components/Error";
 import DashBoard from "../pages/DashBoard";
+import UserList from "../pages/UserList";
+import PropertiesList from "../pages/PropertiesList";
+import AddProperty from "../pages/AddPropert";
+import PropertyDetails from "../pages/PropertyDetails";
 
 const appRouter = createBrowserRouter([
   {
@@ -19,6 +23,22 @@ const appRouter = createBrowserRouter([
       {
         path: "/",
         element: <DashBoard />,
+      },
+      {
+        path: "/user-list",
+        element: <UserList />,
+      },
+      {
+        path: "/properties",
+        element: <PropertiesList />,
+      },
+      {
+        path: "/add-property",
+        element: <AddProperty />,
+      },
+      {
+        path: "/property-details/:id",
+        element: <PropertyDetails />,
       },
     ],
   },

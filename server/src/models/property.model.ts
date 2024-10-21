@@ -21,9 +21,6 @@ interface IProperty extends Document {
   property_type: PropertyType;
   location: ILocation;
   mode: PropertyMode;
-  reserved_units: number;
-  available_units: number;
-  taken_units: number;
   contract_type: ContractType;
   expected_commission: IExpectedCommission;
   marketing_kit: IMarketingKit;
@@ -32,7 +29,7 @@ interface IProperty extends Document {
 
 interface ILocation {
   area: string;
-  google_maps_link: string;
+  google_maps_link: { lat: number; lng: number };
   zone_number: number;
   street_number: number;
   building_number: number;
@@ -61,15 +58,15 @@ const PropertySchema: Schema = new Schema(
     },
     location: {
       area: { type: String, required: true },
-      google_maps_link: { type: String, required: true },
+      google_maps_link: {
+        lat: { type: Number, required: true }, // Latitude as a number
+        lng: { type: Number, required: true }, // Longitude as a number
+      },
       zone_number: { type: Number, required: true },
       street_number: { type: Number, required: true },
       building_number: { type: Number, required: true },
     },
     mode: { type: String, enum: Object.values(PropertyMode), required: true },
-    reserved_units: { type: Number, required: true },
-    available_units: { type: Number, required: true },
-    taken_units: { type: Number, required: true },
     contract_type: {
       type: String,
       enum: Object.values(ContractType),

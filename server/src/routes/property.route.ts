@@ -6,21 +6,21 @@ import {
   updateProperty,
   deleteProperty,
 } from "../controllers/property.controller";
-import { validateProperty } from "../middleware/validation.middleware";
+// import { validateProperty } from "../middleware/validation.middleware";
 
 const router = express.Router();
 
 // Route to create a new property
-router.post("/", validateProperty, createProperty);
+router.post("/add-property", createProperty);
 
 // Route to get all properties
-router.get("/", getAllProperties);
+router.get("/get-properties", getAllProperties);
 
 // Route to get a single property by ID
-router.get("/:id", getPropertyById);
+router.get("/get-property-detail/:id", getPropertyById);
 
 // Route to update a property by ID
-router.put("/:id", validateProperty, updateProperty);
+router.put("/:id", updateProperty);
 
 // Route to delete a property by ID
 router.delete("/:id", deleteProperty);
