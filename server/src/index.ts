@@ -25,7 +25,7 @@ connectDB();
 const PORT = process.env.PORT || 4000;
 
 // API Routes
-app.use("/api/user", userRoutes);
+app.use("/api", userRoutes);
 
 // Start the server with app.listen instead of server.listen
 app.listen(PORT, () => console.log(`server is running on ${PORT}`));

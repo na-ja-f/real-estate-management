@@ -7,8 +7,7 @@ import { generateJWT } from "../utils/generateToken";
 // POST
 // Public
 export const signup = async (req: Request, res: Response): Promise<void> => {
-  const { name, email, password, role } = req.body;
-console.log(req.body);
+  const { name, email, password } = req.body;
 
   try {
     // Check if user exists
@@ -22,13 +21,19 @@ console.log(req.body);
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create new user
-    const user = new User({ name, email, password: hashedPassword, role });
+    const user = new User({ name, email, password: hashedPassword });
     await user.save();
 
     // Generate JWT token
     const token = generateJWT(user);
 
-    res.status(201).json({ token, userId: user._id, role: user.role });
+    res.status(201).json({
+      message: "Agent created",
+      _id: user.id,
+      name: user.name,
+      email: user.email,
+      token,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Signup failed" });
@@ -40,8 +45,7 @@ console.log(req.body);
 // Public
 export const login = async (req: Request, res: Response): Promise<void> => {
   const { email, password } = req.body;
-    console.log(req);
-    
+
   try {
     const user = await User.findOne({ email });
     if (!user) {
@@ -58,7 +62,13 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     // Generate JWT token
     const token = generateJWT(user);
 
-    res.status(200).json({ token, userId: user._id, role: user.role });
+    res.status(200).json({
+      message: "Login Succesfull",
+      _id: user.id,
+      name: user.name,
+      email: user.email,
+      token,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Login failed" });
