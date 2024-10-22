@@ -13,7 +13,7 @@ interface GoogleMapProps {
 
 const GoogleMapComponent: React.FC<GoogleMapProps> = ({ onLocationSelect, center }) => {
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: "AIzaSyA_XylGH-hP916Wg6RmH22uRyBWDRgz7GQ" 
+    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY || ""
   });
 
   const [markerPosition, setMarkerPosition] = useState<{ lat: number; lng: number } | null>(null);
